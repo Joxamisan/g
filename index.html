@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Text Blocks</title>
+    <style>
+        body {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s ease;
+        }
+        .text-block {
+            flex: 1 1 45%; /* responsive bo'lishi uchun */
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: background-color 0.3s ease, font-size 0.3s ease;
+            font-size: 16px; /* boshlang'ich shrift o'lchami */
+        }
+        .text-block:hover {
+            background-color: #d0d0d0;
+            font-size: 64px; /* 4 baravar kattalashgan o'lcham */
+        }
+        @media (max-width: 768px) {
+            .text-block {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="text-block" onmouseover="changeBackgroundColor('#ff9999')" onmouseout="resetBackgroundColor()">Gap 1</div>
+    <div class="text-block" onmouseover="changeBackgroundColor('#99ff99')" onmouseout="resetBackgroundColor()">Gap 2</div>
+    <div class="text-block" onmouseover="changeBackgroundColor('#9999ff')" onmouseout="resetBackgroundColor()">Gap 3</div>
+    <div class="text-block" onmouseover="changeBackgroundColor('#ffff99')" onmouseout="resetBackgroundColor()">Gap 4</div>
+
+    <script>
+        function changeBackgroundColor(color) {
+            document.body.style.backgroundColor = color;
+        }
+
+        function resetBackgroundColor() {
+            document.body.style.backgroundColor = '';
+        }
+
+        // For touch devices
+        const textBlocks = document.querySelectorAll('.text-block');
+        textBlocks.forEach(block => {
+            block.addEventListener('touchstart', () => changeBackgroundColor(block.getAttribute('data-color')));
+            block.addEventListener('touchend', resetBackgroundColor);
+        });
+    </script>
+</body>
+</html>
